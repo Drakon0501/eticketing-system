@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <h1 class="mb-4">Available Events</h1>
+    </div>
+    {% for event in events %}
+    <div class="col-md-4 mb-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">{{ event.name }}</h5>
+                <p class="card-text">{{ event.description }}</p>
+                <ul class="list-unstyled">
+                    <li><strong>Date:</strong> {{ event.date.strftime('%B %d, %Y') }}</li>
+                    <li><strong>Venue:</strong> {{ event.venue }}</li>
+                    <li><strong>Price:</strong> ${{ "%.2f"|format(event.price) }}</li>
+                    <li><strong>Available Tickets:</strong> {{ event.available_tickets }}</li>
+                </ul>
+                {% if current_user.is_authenticated %}
+                <a href="{{ url_for('book_ticket', event_id=event.id) }}" class="btn btn-primary">Book Ticket</a>
+                {% else %}
+                <a href="{{ url_for('login') }}" class="btn btn-secondary">Login to Book</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

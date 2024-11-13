@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-body">
+                    <h2 class="card-title">Book Ticket</h2>
+                    <div class="event-details mb-4">
+                        <h3>{{ event.name }}</h3>
+                        <p>{{ event.description }}</p>
+                        <ul class="list-unstyled">
+                            <li><strong>Date:</strong> {{ event.date.strftime('%B %d, %Y at %I:%M %p') }}</li>
+                            <li><strong>Venue:</strong> {{ event.venue }}</li>
+                            <li><strong>Price:</strong> ${{ "%.2f"|format(event.price) }}</li>
+                            <li><strong>Available Tickets:</strong> {{ event.available_tickets }}</li>
+                        </ul>
+                    </div>
+                    {% if event.available_tickets > 0 %}
+                    <form method="POST">
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary">Confirm Booking</button>
+                        </div>
+                    </form>
+                    {% else %}
+                    <div class="alert alert-warning">
+                        Sorry, this event is sold out!
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -9,10 +9,12 @@
         <div class="col-md-6 mb-4">
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title">{{ ticket.event.name }}</h5>
+                    <h5 class="card-title">{{ ticket.showing.movie.title }}</h5>
                     <ul class="list-unstyled">
-                        <li><strong>Date:</strong> {{ ticket.event.date.strftime('%B %d, %Y at %I:%M %p') }}</li>
-                        <li><strong>Venue:</strong> {{ ticket.event.venue }}</li>
+                        <li><strong>Date:</strong> {{ ticket.showing.datetime.strftime('%B %d, %Y') }}</li>
+                        <li><strong>Time:</strong> {{ ticket.showing.datetime.strftime('%I:%M %p') }}</li>
+                        <li><strong>Screen:</strong> {{ ticket.showing.screen }}</li>
+                        <li><strong>Seat:</strong> {{ ticket.seat_number }}</li>
                         <li><strong>Purchase Date:</strong> {{ ticket.purchase_date.strftime('%B %d, %Y') }}</li>
                         <li><strong>Status:</strong> <span class="badge bg-success">{{ ticket.status }}</span></li>
                     </ul>
@@ -23,7 +25,7 @@
     </div>
     {% else %}
     <div class="alert alert-info">
-        You haven't booked any tickets yet. <a href="{{ url_for('index') }}">Browse available events</a>
+        You haven't booked any tickets yet. <a href="{{ url_for('index') }}">Browse available movies</a>
     </div>
     {% endif %}
 </div>

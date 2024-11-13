@@ -7,17 +7,18 @@
             <div class="card">
                 <div class="card-body">
                     <h2 class="card-title">Book Ticket</h2>
-                    <div class="event-details mb-4">
-                        <h3>{{ event.name }}</h3>
-                        <p>{{ event.description }}</p>
+                    <div class="movie-details mb-4">
+                        <h3>{{ showing.movie.title }}</h3>
+                        <p>{{ showing.movie.description }}</p>
                         <ul class="list-unstyled">
-                            <li><strong>Date:</strong> {{ event.date.strftime('%B %d, %Y at %I:%M %p') }}</li>
-                            <li><strong>Venue:</strong> {{ event.venue }}</li>
-                            <li><strong>Price:</strong> ${{ "%.2f"|format(event.price) }}</li>
-                            <li><strong>Available Tickets:</strong> {{ event.available_tickets }}</li>
+                            <li><strong>Date:</strong> {{ showing.datetime.strftime('%B %d, %Y') }}</li>
+                            <li><strong>Time:</strong> {{ showing.datetime.strftime('%I:%M %p') }}</li>
+                            <li><strong>Screen:</strong> {{ showing.screen }}</li>
+                            <li><strong>Price:</strong> ${{ "%.2f"|format(showing.price) }}</li>
+                            <li><strong>Available Seats:</strong> {{ showing.available_seats }}</li>
                         </ul>
                     </div>
-                    {% if event.available_tickets > 0 %}
+                    {% if showing.available_seats > 0 %}
                     <form method="POST">
                         <div class="d-grid">
                             <button type="submit" class="btn btn-primary">Confirm Booking</button>
@@ -25,7 +26,7 @@
                     </form>
                     {% else %}
                     <div class="alert alert-warning">
-                        Sorry, this event is sold out!
+                        Sorry, this showing is sold out!
                     </div>
                     {% endif %}
                 </div>
